@@ -1,25 +1,4 @@
-#include <iostream>
-#include <string>
-
-// include Lua, assumes it is local to this file
-extern "C"
-{
-  #include "lua/include/lua.h"
-  #include "lua/include/lauxlib.h"
-  #include "lua/include/lualib.h"
-}
-
-bool CheckLua(lua_State *L, int r)
-{
-	if (r != LUA_OK)
-	{
-		std::string errormsg = lua_tostring(L, -1);
-		std::cout << errormsg << std::endl;
-		return false;
-	}
-  
-	return true;
-}
+#include "main.h"
 
 int lua_TestFunction(lua_State *L)
 {
@@ -44,7 +23,10 @@ int main()
 	// Load and parse the Lua File
 	if(CheckLua(L, luaL_dofile(L, "test.lua")))
 	{ 
-	    // todo
+	   	/*if (CheckLua(L, lua_pcall(L, 2, 1, 0)))
+		{ // 2 args, 1 - what return, just 0
+
+		}*/
 	}
 
 	system("pause");
